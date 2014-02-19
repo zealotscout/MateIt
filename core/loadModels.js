@@ -12,7 +12,6 @@ mongoose.connection.once('open',function(){
 	  var modelSchema = require('../models/' + file);
 	  global[modelName]  = mongoose.model(modelName,modelSchema);
 	});
-	console.log(mongoose.models['User'].remove);
 });
 
 

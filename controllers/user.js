@@ -19,9 +19,8 @@ seneca.add({controller:'user',action:'create'},function(args,cb){
 			seneca.act({model:'user',action:'error',when:'created',data:data,error:err},cb);
 			return;
 		}
-
 		//sends message to other microservices to act
-		seneca.act({model:'user',action:'created',user:createdUser},cb);
+		//seneca.act({model:'user',action:'created',user:createdUser},cb);
 		// run the callback = user created
 		cb(null,{user:createdUser});
 	});

@@ -11,12 +11,13 @@ var LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(function(username,password,done){
 	seneca.act({controller:'auth',action:'login',username:username,password:password},function(err,result){
+	if(err){
 		if(err.err == 'missing username' || err.err == 'missing password' || err.err == 'user is not active' || err.err == 'invalid password')
 			return done(null,false,{message:{err:err.err}});
 
-		if(err)
 			return done(err)
-
+	}
+		
 		done(null,result.user)
 	});
 }));
@@ -26,10 +27,10 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id,done){
-	seneca.act({controller:'auth',action:'deserialize'},function(err,result){
+	seneca.act({controller:'auth',action:'deserialize',id:id},function(err,result){
 		if(err)
 			return done(err);
-		done(null,user);
+		done(null,result.user);
 	})
 });
 
@@ -49,8 +50,8 @@ seneca.add({controller:'auth',action:'login'},function(args,cb){
 		if(err)
 			return cb({err:err});
 		
-		if(!user.isActive())
-			return cb({err:'user is not active'});
+		/*if(!user.isActive())
+			return cb({err:'user is not active'});*/
 
 		if(!user.compareHash(args.password))
 			return cb({err:'invalid password'});

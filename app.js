@@ -12,6 +12,7 @@ var start = function(done){
 // Global for usage in models and controllers
 global.app = express();
 global.passport = require('passport');
+global.express = express;
 
 //Load Config Files
 require('./core/loadConfig');
@@ -25,10 +26,11 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-app.use(express.session({ secret: '245e2b98489cf1c1738f2f7d3180f712' }));
+app.use(express.session({ secret: 'gato' }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')),{maxAge:1});
 app.locals.pretty = true;
 
 // development only

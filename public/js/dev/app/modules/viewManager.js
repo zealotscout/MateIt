@@ -21,5 +21,18 @@ define(function(require){
 		});
 	}
 
-	return {setView:setView};
+	var listenAttachView = function(msg,data){
+		var view = data.view;
+		setView(view);
+	}
+
+	var initialize = function(core){
+		this.core = core;
+		this.core.f.sub('viewManager','viewManager.setView',listenAttachView);
+	};
+
+	return {
+			initialize: initialize,
+			setView:setView
+		};
 });
