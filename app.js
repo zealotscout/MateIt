@@ -1,6 +1,7 @@
 var express = require('express'),
 		http = require('http'),
-		path = require('path');
+		path = require('path'),
+		Acl = require('acl');
 
 // Start app
 var start = function(done){
@@ -13,6 +14,12 @@ var start = function(done){
 global.app = express();
 global.passport = require('passport');
 global.express = express;
+global.acl = new Acl(new Acl.memoryBackend());
+var roles = require('./roles/roles');
+acl.allow(roles,function(err){});
+
+// load permissions
+
 
 //Load Config Files
 require('./core/loadConfig');

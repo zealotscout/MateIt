@@ -9,6 +9,7 @@
  });
 
  // User creation errorHandler
- seneca.add({model:'user',action:'error',when:'created'},function(args,cb){
+ seneca.add({model:'user',action:'error'},function(args,cb){
+ 	console.log(args);
  	return cb({errorMessage:args.error});
  });
