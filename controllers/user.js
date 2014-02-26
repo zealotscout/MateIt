@@ -10,6 +10,8 @@
  * action: create
  */
 
+ var _ = require('underscore');
+
  //TODO: Recreate as promise based chain
 seneca.add({controller:'user',action:'create'},function(args,cb){
 	User.count(function(err,count){
@@ -77,6 +79,27 @@ seneca.add({controller:'user',action:'delete'},function(args,cb){
 			if(err){
 				//pass error to be handled for error handler			
 				seneca.act({model:'user',action:'error',when:'deleting',id:id,error:err},cb);
+				return;
+			}
+			cb(null,{user:user});
+		});
+	});
+});
+
+seneca.add({controller:'user',action:'update'},function(args,cb){
+	var data = args.data,
+			id = args.id;
+	User.findById(id,'-password -emailKey',function(err,user){
+		if(err){
+			//pass error to be handled for error handler			
+			seneca.act({model:'user',action:'error',when:'updating',id:id,error:err},cb);
+			return;
+		}
+		var user = _.extend(user,data);
+		user.save(function(err){
+			if(err){
+				//pass error to be handled for error handler			
+				seneca.act({model:'user',action:'error',when:'updating',id:id,error:err},cb);
 				return;
 			}
 			cb(null,{user:user});

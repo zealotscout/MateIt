@@ -1,0 +1,11 @@
+{
+  "name": "MateIt",
+  "version": "0.0.1",
+  "dependencies": {
+  	"underscore":"1.6.0",
+    "jquery": "~1.10.x",
+    "aura": "latest",
+    "backbone": "latest",
+    "requirejs-text": "~2.0.10"
+  }
+}
