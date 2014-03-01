@@ -2,7 +2,8 @@ var express = require('express'),
 		http = require('http'),
 		path = require('path'),
 		Acl = require('acl'),
-		ConnectMincer = require('connect-mincer');
+		ConnectMincer = require('connect-mincer'),
+		mincerHbs = require('mincer-hbs');
 
 
 // Start app
@@ -33,6 +34,8 @@ var connectMincer = new ConnectMincer({
   paths: ['public/']
 });
 //Other Configuration
+// Setup Mincer for precompiling HBS Templates
+mincerHbs(connectMincer.Mincer);
 app.set("views", __dirname + "/views");
 app.set("view engine", "jade");
 app.set('port', process.env.PORT || 3000);

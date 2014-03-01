@@ -8,6 +8,7 @@
     "backbone": "latest",
     "requirejs-text": "~2.0.10",
     "requirejs": "~2.1.11",
-    "hbs": "~0.8.0"
+    "hbs": "~0.8.0",
+    "handlebars": "~2.0.0"
   }
 }

@@ -1,4 +1,6 @@
 //Module for NavBar Logic
+//= require_directory ./views/templates
+//= require_directory ./views
 MateIt.app.module('NavBar',function(NavBar,app,Backbone,Marionette,$,_){
 	var layout = {};
 
@@ -24,15 +26,16 @@ MateIt.app.module('NavBar',function(NavBar,app,Backbone,Marionette,$,_){
 	//======Public API======
 	NavBar.API = {
 		showNavBar: function(){
-			var layout = getLayout();
+			layout = getLayout();
 			layout.on('show',function(){
 				NavBar.API.showLogo();
 				NavBar.API.showLinks();
 			});
-			app.appContainer.show(layout);
+			app.navbar.show(layout);
 		},
 		showLogo: function(){
 			var view = getLogoView();
+			console.log(layout);
 			layout.logoRegion.show(view);
 		},
 		showLinks: function(){
@@ -42,6 +45,7 @@ MateIt.app.module('NavBar',function(NavBar,app,Backbone,Marionette,$,_){
 		}
 	}
 	app.addInitializer(function(){
+		console.log(NavBar);
 		NavBar.API.showNavBar();
 	});
 });

@@ -14,6 +14,10 @@
     "passport-facebook": "~1.0.2",
     "mongoose": "~3.8.6",
     "mongoose-validator": "~0.2.2",
-    "acl": "~0.2.6"
+    "acl": "~0.2.6",
+    "mincer": "^0.5.13",
+    "connect-mincer": "^1.0.0",
+    "mincer-hbs": "^1.0.1",
+    "handlebars": "^2.0.0-alpha.1"
   }
 }
