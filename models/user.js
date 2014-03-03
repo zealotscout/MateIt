@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt'),
     validate = require('mongoose-validator').validate;
 
 var Schema = new mongoose.Schema({
-	name: {type:String,required:true,validate:[validate('len',1,20),validate('regex',/^[A-Za-z ]+$/)]},
+	name: {type:String,required:true,validate:[validate('len',1,50),validate('regex',/^[A-Za-z ]+$/)]},
 	password: {type:String,required:true,validate:[validate('len',6,20)]},
 	username: {type:String,required:true,unique:true,index:true,validate:[validate('len',6,20),validate('regex',/^[a-z A-Z][a-zA-Z0-9_\-]+[a-zA-Z0-9]+$/)]},
 	email: {type:String,required:true,unique:true,index:true,validate:[validate('isEmail')]},

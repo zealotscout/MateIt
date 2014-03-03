@@ -5,29 +5,42 @@ MateIt.app.module('Auth',function(Auth,app,Backbone,Marionette,$,_){
 		fields:{
 			username:{
 				el:'.form-group.username',
-				required:'Please enter a valid adress'
+				required:'*Campo Requerido'
 			},
 			password:{
 				el:'.form-group.password',
-				required:'Please enter a password adress',
+				required:'*Campo Requerido',
 				validations:{
-					password:"Please enter a valid password adress"
+					passwordLength:"Tu contraseña debe ser mayor a 6 caracteres"
 				}
+			}
+		},
+		rules:{
+			passwordLength: function(val){
+				 return val.length > 6;
 			}
 		},
 		removeErrors: function(){
 			this.$el.find(".has-error").removeClass("has-error");
 		},
-		processErrors: function(errors){
-			this.removeErrors();
-			_.each(errors,function(element){
-				$(element.el).addClass("has-error");
-			});
+		removeTooltips:function(){
+			this.$el.find("input").tooltip('destroy');
 		},
-		rules:{
-			password: function(val){
-				 return val.length > 6;
-			}
+		addErrorTooltip:function(element){
+			$(element.el).addClass("has-error");
+			$(element.el).find('input').tooltip({
+				title: element.error[0],
+				placement:'right',
+				trigger:'manual'
+			}).tooltip('show');
+		},
+		processErrors: function(errors){
+			var self = this;
+			this.removeErrors();
+			this.removeTooltips();
+			_.each(errors,function(element){
+				self.addErrorTooltip(element);
+			});
 		},
 		onSubmit:function(evt){
 			this.removeErrors();

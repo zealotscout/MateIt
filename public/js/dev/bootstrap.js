@@ -1,5 +1,6 @@
 //= require js/dev/bower_components/handlebars/handlebars.runtime.js
 //= require js/dev/bower_components/jquery/jquery.js
+//= require ./bower_components/bootstrap/js/tooltip.js
 //= require js/dev/bower_components/underscore/underscore.js
 //= require js/dev/bower_components/backbone/backbone.js
 //= require js/dev/bower_components/marionette/lib/backbone.marionette.min.js
