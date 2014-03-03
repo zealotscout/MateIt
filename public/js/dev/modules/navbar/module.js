@@ -35,7 +35,6 @@ MateIt.app.module('NavBar',function(NavBar,app,Backbone,Marionette,$,_){
 		},
 		showLogo: function(){
 			var view = getLogoView();
-			console.log(layout);
 			layout.logoRegion.show(view);
 		},
 		showLinks: function(){
@@ -45,7 +44,6 @@ MateIt.app.module('NavBar',function(NavBar,app,Backbone,Marionette,$,_){
 		}
 	}
 	app.addInitializer(function(){
-		console.log(NavBar);
 		NavBar.API.showNavBar();
 	});
 });
