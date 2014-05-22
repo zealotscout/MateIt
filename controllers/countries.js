@@ -1,0 +1,9 @@
+seneca.add({controller:'countries',action:'list'},function(args,cb){
+	Countries.find({}).lean().exec(function(err,countries){
+		if(err){
+			seneca.act({model:'property',action:'error',when:'listing',data:data,error:err},cb);
+				return;
+		}
+		cb(null,{countries:countries});
+	});
+});

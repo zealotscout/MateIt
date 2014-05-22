@@ -1,7 +1,8 @@
 var bcrypt = require('bcrypt'),
     SALT_WORK_FACTOR = 10,
     crypto = require('crypto'),
-    validate = require('mongoose-validator').validate;
+    validate = require('mongoose-validator').validate
+var troop = require('mongoose-troop');
 
 var Schema = new mongoose.Schema({
 	name: {type:String,required:true,validate:[validate('len',1,50),validate('regex',/^[A-Za-z ]+$/)]},
@@ -11,10 +12,13 @@ var Schema = new mongoose.Schema({
 	country: String,
 	birthdate: {type:Date,required:true},
 	emailKey: String,
-	active: {type:Boolean,default:false}
+	active: {type:Boolean,default:false},
+  createdAt:{type:Date,default:Date.now()
+  }
 });
 
 //Encrypt password in the database
+Schema.plugin(troop.timestamp);
 Schema.pre('save',true,function(next,done){
 	var self = this;
     if (!self.isModified('password')){

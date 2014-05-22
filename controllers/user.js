@@ -12,6 +12,8 @@
 
  var _ = require('underscore');
 
+
+
  //TODO: Recreate as promise based chain
 seneca.add({controller:'user',action:'create'},function(args,cb){
 	User.count(function(err,count){
@@ -46,6 +48,7 @@ seneca.add({controller:'user',action:'list'},function(args,cb){
 	User.find({},'-password -emailKey').lean().exec(function(err,users){
 		if(err){
 			//pass error to be handled for error handler			
+			console.log("listed");
 			seneca.act({model:'user',action:'error',when:'listing',data:data,error:err},cb);
 			return;
 		}
@@ -60,7 +63,8 @@ seneca.add({controller:'user',action:'get'},function(args,cb){
 		if(err){
 			//pass error to be handled for error handler			
 			seneca.act({model:'user',action:'error',when:'getting',id:id,error:err},cb);
-			return;
+				return;
+
 		}
 
 		cb(null,{user:user});

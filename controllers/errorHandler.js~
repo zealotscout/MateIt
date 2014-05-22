@@ -18,8 +18,3 @@
  	console.log(args);
  	return cb({errorMessage:args.error});
  });
-
-seneca.add({model:'picture',action:'error'},function(args,cb){
-	console.log(args);
-	return cb({errorMessage:args.error});
- });

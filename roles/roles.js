@@ -8,5 +8,11 @@ module.exports = [
 		allows:[
 			{resources:['self'],permissions:['view','edit','update','delete']}
 		]
+	},
+	{
+		roles:'owner',
+		allows:[
+			{resources:['self'],permissions:['view','edit','update','delete']}
+		]
 	}
 ]

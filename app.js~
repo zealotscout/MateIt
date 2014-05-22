@@ -3,10 +3,7 @@ var express = require('express'),
 		path = require('path'),
 		Acl = require('acl'),
 		ConnectMincer = require('connect-mincer'),
-		mincerHbs = require('mincer-hbs'),
-		passport = require('passport'),
-		LocalStrategy = require('passport-local').Strategy;
-		
+		mincerHbs = require('mincer-hbs');
 
 
 // Start app
@@ -57,7 +54,7 @@ app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')),{maxAge:1});
 app.locals.pretty = true;
-
+app.use('/uploads', express.static(uploads_base));
 app.use('/', express.static(path.join(__dirname, 'public')));
 // development only
 if ('development' == app.get('env')) {
